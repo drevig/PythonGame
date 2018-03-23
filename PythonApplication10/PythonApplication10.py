@@ -93,7 +93,7 @@ def Bid():
     #Fund_Check(All_Corps)
     for corps in range(0,len(Potential_Clients)):
         Chance = random.randint(0,100)
-        #Potential_Clients = Bid_Order
+        Potential_Clients = Bid_Order
         Bid_Order[N] = [Chance]
         N = N + 1
 
