@@ -88,21 +88,32 @@ def Mat_Check(Materials):
         else:
             TN = TN + 1
 
-def Bid():
+def Who_Wins():
     N = 0
-    #Fund_Check(All_Corps)
     for corps in range(0,len(Potential_Clients)):
         Chance = random.randint(0,100)
-        Potential_Clients = Bid_Order
-        Bid_Order[N] = [Chance]
+        #Potential_Clients = Bid_Order
+        Potential_Clients[N][Chance] = [Chance]
+        Potential_Clients.sort
         N = N + 1
+    return Potential_Clients[0]
+
+def Mat_To_Buy():
+    Potential_Materials.sorted
+    return Materials[str(Potential_Materials[0])]
+
 
 def Purchase():
     Fund_Check(All_Corps)
     Mat_Check(Materials)
     if len(Potential_Clients) and len(Potential_Materials) >= 1:
         if len(Potential_Clients) >=2:
-            Bid()
+            Who_Wins()
+            Mat_To_Buy
+            All_Corps[str(Who_Wins())]["Funds"] - (Mat_To_Buy()["Price"])
+            (Mat_To_Buy()["Quantity"]) - 1
+            All_Corps[str(Who_Wins())]["Material Bank"] + [Mat_To_Buy()]["Name"]
+
 
 ##########################################################
 
@@ -132,7 +143,7 @@ Materials = {}
 Corp_No = 0
 
 for corps in range(Number_Of_Corps):
-    All_Corps[Corp_No] = { "Name" : Name_Gen(),  "Location" : Location_Gen(), "Leader": Leader_Gen() , "Funds" : 1}
+    All_Corps[Corp_No] = { "Name" : Name_Gen(),  "Location" : Location_Gen(), "Leader": Leader_Gen() , "Funds" : 10000, "Material Bank" : 0, "Roll": 0}
     Corp_No = Corp_No + 1
 
   
@@ -148,37 +159,34 @@ for mats in range(Material_Number):
     Materials[Mat_No]["Price"] = Mat_Price(Mat_No)
     Mat_No = Mat_No + 1
 
+# Material Gen 
+def Mat_Gen():
+    NM = 0
+    for mats in range(0,len(Materials)):
+        if Materials[NM]["Rarity"] <= 10:
+            Materials[NM]["Quantity"] = Materials[NM]["Quantity"] + 100
+        elif Materials[NM]["Rarity"] >= 30:
+            Materials[NM]["Quantity"] = Materials[NM]["Quantity"] + 70
+        elif Materials[NM]["Rarity"] <= 50:
+            Materials[NM]["Quantity"] = Materials[NM]["Quantity"] + 30
+        elif Materials[NM]["Rarity"] <= 80:
+            Materials[NM]["Quantity"] = Materials[NM]["Quantity"] + 10
+        elif Materials[NM]["Rarity"] <= 90:
+            Materials[NM]["Quantity"] = Materials[NM]["Quantity"] + 1
+
  #Environment
  #Weather (to do)
-
-# Time
-Hour = 0
-Day = 0
-Month = 0
-Year = 0
- # Day Properties
-Daytime = 1
-Nighttime = 0
  
-
-# Funds
-Funds = 0
-
-
-World_Bank_Funds = 100
-
-
-
 
 # Legality (TO DO)
 Legal = True
 
-
-
 # World Bank Gen
 
 World_Bank= {}
+World_Bank_Funds = 1000
 World_Bank["World Bank"] = ((0), "Metropolis", (Leader_Gen)(), World_Bank_Funds)
+
 
 
 # Purchasing Mechanics
@@ -193,13 +201,38 @@ Bid_Order = []
 Successful_Corp = []
 N = 0
 
+# Time
+Hour = 0
+Day = 0
+Month = 0
+Year = 0
+Time = 9
+AM_PM = "AM"
+ # Day Properties
+Daytime = 1
+Nighttime = 0
 
-Bid()
-print(Bid_Order)
-print(Bid_Order)
-
-
-       
+#Day Cycle
+while 1 == 1:
+    for Day in range(0,8):
+        Mat_Gen()
+        Hour = Hour + 1
+        Time = str(9) + str(AM_PM)
+        Purchase()
+        print (Time)
+        time.sleep(5)
+        clear()
+    
+    
+# Time
+Hour = 0
+Day = 0
+Month = 0
+Year = 0
+ # Day Properties
+Daytime = 1
+Nighttime = 0
+    
 
         
 
